@@ -1,0 +1,15 @@
+Строим образ
+docker build -t dim/echo-image .
+
+Запушим
+
+docker push dim/echo-image 
+
+Запустим
+
+docker run -p 8000:5000 echo-image:latest
+
+Проверим
+
+curl http://localhost:8000/health
+ {"status": "OK"}
