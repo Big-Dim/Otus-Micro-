@@ -4,7 +4,7 @@ docker build --platform linux/amd64 -t echo-image:v1 .
 Запушим
 
 docker tag echo-image:v1 dnpodolnyy/otus
-docker push dnpodolnyy/otus 
+docker push dnpodolnyy/otus:v1
 
 Запустим
 
