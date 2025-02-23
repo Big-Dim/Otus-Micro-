@@ -1,14 +1,14 @@
 Строим образ
-docker build -t echo-image .
+docker build --platform linux/amd64 -t echo-image:v1 .
 
 Запушим
 
-docker tag echo-image dnpodolnyy/otus
+docker tag echo-image:v1 dnpodolnyy/otus
 docker push dnpodolnyy/otus 
 
 Запустим
 
-docker run --name echo-servise -d -p 8000:5000 echo-image:latest
+docker run --name echo-servise -d -p 8000:5000 echo-image:v1
 
 Проверим
 
