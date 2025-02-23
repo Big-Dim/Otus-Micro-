@@ -1,15 +1,16 @@
 Строим образ
-docker build -t dim/echo-image .
+docker build -t echo-image .
 
 Запушим
 
-docker push dim/echo-image 
+docker tag echo-image dnpodolnyy/otus
+docker push dnpodolnyy/otus 
 
 Запустим
 
-docker run -p 8000:5000 echo-image:latest
+docker run --name echo-servise -d -p 8000:5000 echo-image:latest
 
 Проверим
 
-curl http://localhost:8000/health
+http://localhost:8000/health
  {"status": "OK"}
