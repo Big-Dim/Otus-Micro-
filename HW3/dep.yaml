@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp-echo-deployment
+  labels:
+        app: dp-echo 
+spec: # specification of the deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 5
+  selector:
+    matchLabels:
+      app: dp-echo
+  template:
+    metadata:
+      labels:
+        app: dp-echo
+    spec:
+      containers:
+      - name: hw-echo-1
+        image: dnpodolnyy/otus:latest
+        ports:
+          - name: web
+            containerPort: 8000
