@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-config
+  labels:
+    app: flask-app
+data:
+  dburl: postgresql://postgres:postgres@flask-db:5432/postgres
+  

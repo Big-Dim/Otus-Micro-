@@ -1,0 +1,18 @@
+Строим образ
+docker build --platform linux/amd64 -t crud-image:v1 .
+
+Запушим
+
+docker tag crud-image:v1 dnpodolnyy/crud-image:v1
+docker push dnpodolnyy/crud-image:v1
+
+Запустим
+
+docker compose up -d flask_db
+docker compose build
+docker compose up flask_app
+
+Проверим
+
+http://localhost:8000/test
+ {"message": "test route"}

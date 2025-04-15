@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.dbAppName }} 
+spec:
+  replicas: {{ .Values.replicaCount }} 
+  selector:
+    matchLabels:
+      app: {{ .Values.dbAppName }} 
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.dbAppName }} 
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret 
+                  key: POSTGRES_DB
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret 
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: kuber-secret 
+                  key: POSTGRES_USER
+          image: postgres:12
+          name: {{ .Values.dbAppName }} 
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+      restartPolicy: Always
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: pgdata

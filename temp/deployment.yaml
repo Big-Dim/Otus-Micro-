@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dp-crud-deployment
+  labels:
+        app: dp-crud
+spec: # specification of the deployment
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dp-crud
+  template:
+    metadata:
+      labels:
+        app: dp-crud
+    spec:
+      containers:
+      - name: hw-crud-1
+        image: dnpodolnyy/crud-image:v1
+        ports:
+          - name: web
+            containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3

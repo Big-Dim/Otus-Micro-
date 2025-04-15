@@ -1,0 +1,4 @@
+flask-crud - CRUD приложение 
+	инструкция по сборке образа и запуску контейнера Docker
+	в файле Docker commands.txt
+helm-crud - helm chart для запуска CRUD круд приложения.
